@@ -17,3 +17,20 @@ siteNav.addEventListener("click", (event) => {
 });
 
 document.querySelector("#year").textContent = new Date().getFullYear();
+
+document.querySelectorAll(".project-art-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    const wasExpanded = button.getAttribute("aria-expanded") === "true";
+    const details = document.getElementById(button.getAttribute("aria-controls"));
+
+    document.querySelectorAll(".project-art-button").forEach((otherButton) => {
+      otherButton.setAttribute("aria-expanded", "false");
+      document.getElementById(otherButton.getAttribute("aria-controls")).hidden = true;
+    });
+
+    if (!wasExpanded) {
+      button.setAttribute("aria-expanded", "true");
+      details.hidden = false;
+    }
+  });
+});
