@@ -35,3 +35,13 @@
 .about-grid{grid-template-columns:minmax(0,820px);gap:0;margin:50px 0 0}
 .about-copy{max-width:760px}
 @media(max-width:760px){.intro-banner{min-height:370px;padding:60px 23px}.intro-banner h1{font-size:clamp(44px,11vw,62px)}.intro-banner p{font-size:15px}.about-grid{grid-template-columns:1fr;margin-top:34px}}
+
+@media(min-width:761px){.about-grid{grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);align-items:center;gap:8%}}
+.about-portrait img{aspect-ratio:1;height:auto}
+.experience>h2{font-size:clamp(42px,5vw,62px);margin:42px 0 30px}
+.experience-entry{display:grid;grid-template-columns:minmax(180px,240px) 1fr;gap:36px;padding:26px 0;border-top:1px solid #3d412755;max-width:980px}
+.experience-meta{display:flex;flex-direction:column;gap:7px;font:9px var(--mono);letter-spacing:.05em;color:var(--olive)}
+.experience-entry h3{font-size:20px;letter-spacing:-.04em;margin:0 0 5px}
+.experience-entry p{max-width:620px;font-size:13px;color:#6f705b;margin:10px 0 0}
+.experience-entry .experience-place{font-size:11px;color:var(--olive);margin-top:0}
+@media(max-width:760px){.experience>h2{margin:32px 0 22px}.experience-entry{grid-template-columns:1fr;gap:12px;padding:20px 0}}
