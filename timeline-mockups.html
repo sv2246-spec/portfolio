@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2e9">
+  <title>Project timeline tree concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --olive: #636b2f;
+      --lime: #d4de95;
+      --ink: #3d4127;
+      --paper: #f4f2e9;
+      --surface: #eeede3;
+      --muted: #777762;
+      --mono: "Space Mono", monospace;
+      --sans: "Plus Jakarta Sans", sans-serif;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--paper);
+      scroll-behavior: smooth;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 3;
+      padding: 10px 14px;
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .skip-link:focus {
+      left: 12px;
+    }
+
+    .page-header,
+    .tree-option {
+      width: min(100% - 48px, 1360px);
+      margin-inline: auto;
+    }
+
+    .page-header {
+      padding: 54px 0 22px;
+    }
+
+    .eyebrow,
+    .section-label,
+    .tree-category,
+    .tree-index {
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--olive);
+      font-size: 10px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .page-header h1 {
+      max-width: 760px;
+      margin-bottom: 12px;
+      font-size: clamp(38px, 6vw, 72px);
+      line-height: .98;
+      letter-spacing: -.075em;
+      font-weight: 500;
+    }
+
+    .page-header h1 em {
+      color: var(--olive);
+      font-family: Georgia, serif;
+      font-weight: 400;
+    }
+
+    .page-intro {
+      max-width: 640px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .page-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .page-nav a {
+      padding: 7px 13px;
+      border: 1px solid #3d412755;
+      border-radius: 30px;
+      color: inherit;
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .page-nav a:hover,
+    .page-nav a:focus-visible {
+      color: var(--paper);
+      background: var(--olive);
+    }
+
+    .tree-option {
+      padding: 44px 0 60px;
+      border-top: 1px solid #3d412733;
+      scroll-margin-top: 20px;
+    }
+
+    .section-label {
+      margin: 0 0 10px;
+      color: var(--olive);
+      font-size: 10px;
+    }
+
+    .tree-option h2 {
+      margin-bottom: 8px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -.06em;
+      font-weight: 500;
+    }
+
+    .option-intro {
+      max-width: 670px;
+      margin-bottom: 32px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .h-scroll {
+      overflow-x: auto;
+      padding: 8px 0 20px;
+      scrollbar-color: var(--olive) #e3e1d5;
+      scrollbar-width: thin;
+    }
+
+    .h-tree {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(7, minmax(166px, 1fr));
+      min-width: 1320px;
+      min-height: 700px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .h-tree::before {
+      position: absolute;
+      top: 50%;
+      right: 3%;
+      left: 3%;
+      height: 9px;
+      border-radius: 10px;
+      background: var(--olive);
+      box-shadow: 0 4px 0 #3d412722;
+      content: "";
+      transform: translateY(-50%);
+    }
+
+    .h-item {
+      position: relative;
+      min-width: 0;
+      height: 700px;
+    }
+
+    .h-item::after {
+      position: absolute;
+      left: 50%;
+      width: 2px;
+      background: var(--olive);
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .h-item.branch-up::after {
+      top: 24%;
+      height: 26%;
+    }
+
+    .h-item.branch-down::after {
+      top: 50%;
+      height: 26%;
+    }
+
+    .tree-node {
+      position: absolute;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      display: grid;
+      width: 82px;
+      height: 82px;
+      place-items: center;
+      padding: 0;
+      border: 7px solid var(--surface);
+      border-radius: 50%;
+      color: var(--ink);
+      background: var(--lime);
+      box-shadow: 0 8px 18px #3d412733;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      transition: transform .25s ease, color .25s ease, background .25s ease;
+    }
+
+    .tree-node:hover,
+    .tree-node[aria-expanded="true"] {
+      color: var(--paper);
+      background: var(--olive);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+
+    .tree-node:focus-visible {
+      outline: 3px solid var(--ink);
+      outline-offset: 3px;
+    }
+
+    .node-icon {
+      font: 34px/1 var(--mono);
+    }
+
+    .tree-index {
+      position: absolute;
+      right: 1px;
+      bottom: 1px;
+      font-size: 7px;
+      opacity: .7;
+    }
+
+    .tree-info {
+      position: absolute;
+      left: 5%;
+      width: 90%;
+      padding: 12px 12px 13px;
+      border-top: 2px solid var(--olive);
+      background: #fbfaf5;
+      box-shadow: 0 7px 20px #3d41271a;
+    }
+
+    .branch-up .tree-info {
+      top: 4%;
+    }
+
+    .branch-down .tree-info {
+      top: 78%;
+    }
+
+    .branch-down:nth-child(4n) .tree-info {
+      top: 76%;
+      left: 0;
+      width: 96%;
+    }
+
+    .branch-up:nth-child(3n) .tree-info {
+      top: 1%;
+      left: 0;
+      width: 96%;
+    }
+
+    .tree-info h3 {
+      margin: 0 0 3px;
+      font-size: 15px;
+      line-height: 1.25;
+      letter-spacing: -.04em;
+    }
+
+    .tree-category {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--olive);
+      font-size: 8px;
+    }
+
+    .tree-leaf {
+      margin: 0;
+      padding: 8px 9px;
+      border-left: 2px solid var(--lime);
+      color: #656650;
+      background: var(--paper);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .branch-up .tree-leaf {
+      transform: translateX(8px);
+    }
+
+    .branch-down .tree-leaf {
+      transform: translateX(-6px);
+    }
+
+    .v-tree {
+      --tree-progress: 0%;
+      position: relative;
+      display: grid;
+      gap: 16px;
+      max-width: 1080px;
+      margin: 30px auto 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .v-tree::before {
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 8px;
+      border-radius: 8px;
+      background: linear-gradient(to bottom, var(--olive) 0 var(--tree-progress), #d4d2c2 var(--tree-progress) 100%);
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .v-tree::after {
+      position: absolute;
+      z-index: 1;
+      top: var(--tree-marker, 0%);
+      left: 50%;
+      width: 18px;
+      height: 18px;
+      border: 4px solid var(--paper);
+      border-radius: 50%;
+      background: var(--olive);
+      box-shadow: 0 0 0 2px var(--olive);
+      content: "";
+      transform: translate(-50%, -50%);
+    }
+
+    .v-item {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 84px minmax(0, 1fr);
+      align-items: center;
+      min-height: 220px;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .55s ease, transform .55s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .v-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .v-node {
+      position: relative;
+      top: auto;
+      left: auto;
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: center;
+      transform: none;
+    }
+
+    .v-node:hover,
+    .v-node[aria-expanded="true"] {
+      transform: scale(1.08);
+    }
+
+    .v-project {
+      position: relative;
+      grid-row: 1;
+      width: min(100%, 390px);
+      padding: 16px;
+      border-top: 2px solid var(--olive);
+      background: #fbfaf5;
+      box-shadow: 0 8px 22px #3d41271a;
+    }
+
+    .side-left .v-project {
+      grid-column: 1;
+      justify-self: end;
+      margin-right: 36px;
+    }
+
+    .side-right .v-project {
+      grid-column: 3;
+      justify-self: start;
+      margin-left: 36px;
+    }
+
+    .v-project::before {
+      position: absolute;
+      top: 40px;
+      width: 36px;
+      height: 2px;
+      background: var(--olive);
+      content: "";
+    }
+
+    .side-left .v-project::before {
+      right: -36px;
+    }
+
+    .side-right .v-project::before {
+      left: -36px;
+    }
+
+    .v-project h3 {
+      margin: 0 0 2px;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: -.045em;
+    }
+
+    .side-left .v-project h3,
+    .side-left .v-project .tree-category {
+      text-align: right;
+    }
+
+    .v-project .tree-category {
+      margin-bottom: 10px;
+    }
+
+    .v-leaf {
+      position: relative;
+      width: min(90%, 310px);
+      padding: 10px 12px;
+      border-left: 2px solid var(--lime);
+      color: #656650;
+      background: var(--paper);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .side-left .v-leaf {
+      margin: 0 0 0 auto;
+      border-right: 2px solid var(--lime);
+      border-left: 0;
+      text-align: left;
+      transform: translate(-22px, 12px);
+    }
+
+    .side-right .v-leaf {
+      margin: 0 auto 0 0;
+      transform: translate(22px, -9px);
+    }
+
+    .side-left:nth-child(3n) .v-leaf {
+      transform: translate(-48px, -11px);
+    }
+
+    .side-right:nth-child(3n) .v-leaf {
+      transform: translate(42px, 17px);
+    }
+
+    .side-left:nth-child(4n) .v-leaf {
+      transform: translate(-8px, 24px);
+    }
+
+    .side-right:nth-child(4n) .v-leaf {
+      transform: translate(8px, -22px);
+    }
+
+    .scroll-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font: 9px var(--mono);
+      text-align: center;
+    }
+
+    .page-footer {
+      padding: 25px 24px 40px;
+      color: var(--muted);
+      font: 9px var(--mono);
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .page-header,
+      .tree-option {
+        width: min(100% - 36px, 1360px);
+      }
+
+      .page-header {
+        padding-top: 35px;
+      }
+
+      .tree-option {
+        padding-block: 34px 42px;
+      }
+
+      .h-tree {
+        min-width: 1260px;
+      }
+
+      .v-tree {
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .v-tree::before,
+      .v-tree::after {
+        left: 28px;
+      }
+
+      .v-item {
+        grid-template-columns: 58px minmax(0, 1fr);
+        min-height: 200px;
+      }
+
+      .v-node {
+        grid-column: 1;
+        justify-self: start;
+        width: 58px;
+        height: 58px;
+        border-width: 5px;
+      }
+
+      .v-node .node-icon {
+        font-size: 25px;
+      }
+
+      .v-project,
+      .side-left .v-project,
+      .side-right .v-project {
+        grid-column: 2;
+        justify-self: stretch;
+        width: auto;
+        margin: 0 0 0 22px;
+        padding: 13px;
+      }
+
+      .side-left .v-project h3,
+      .side-left .v-project .tree-category {
+        text-align: left;
+      }
+
+      .v-project::before,
+      .side-left .v-project::before,
+      .side-right .v-project::before {
+        top: 28px;
+        right: auto;
+        left: -22px;
+        width: 22px;
+      }
+
+      .v-leaf,
+      .side-left .v-leaf,
+      .side-right .v-leaf,
+      .side-left:nth-child(3n) .v-leaf,
+      .side-right:nth-child(3n) .v-leaf,
+      .side-left:nth-child(4n) .v-leaf,
+      .side-right:nth-child(4n) .v-leaf {
+        width: min(94%, 310px);
+        margin-left: auto;
+        border-right: 0;
+        border-left: 2px solid var(--lime);
+        text-align: left;
+        transform: translate(9px, 8px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root {
+        scroll-behavior: auto;
+      }
+
+      .v-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="page-header">
+    <p class="eyebrow">PROJECT TIMELINE · TWO CONCEPTS</p>
+    <h1>Same projects.<br><em>A new way to branch.</em></h1>
+    <p class="page-intro">Compare a horizontal tree and a scroll-responsive vertical tree. Project details branch out on alternating sides; scroll the vertical version to follow its growing trunk.</p>
+    <nav class="page-nav" aria-label="Timeline concepts">
+      <a href="#horizontal">Horizontal tree</a>
+      <a href="#vertical">Vertical scroll tree</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="tree-option" id="horizontal" aria-labelledby="horizontal-title">
+      <p class="section-label">VERSION 01 · SIDE TO SIDE</p>
+      <h2 id="horizontal-title">Horizontal tree</h2>
+      <p class="option-intro">The project path runs left to right. Main branches alternate above and below it, with subsection leaves offset to keep the layout organic. Scroll horizontally to explore all seven projects.</p>
+      <div class="h-scroll" tabindex="0" aria-label="Horizontal timeline tree; scroll sideways to explore">
+        <ol class="h-tree">
+          <li class="h-item branch-up">
+            <button class="tree-node" type="button" aria-expanded="true" aria-controls="h-detail-1" aria-label="Collapse Bloomino details"><span class="node-icon" aria-hidden="true">✿</span><span class="tree-index">01</span></button>
+            <div class="tree-info"><h3>Bloomino</h3><span class="tree-category">DESIGN</span><p class="tree-leaf" id="h-detail-1">A people-centered design project. Project details coming soon.</p></div>
+          </li>
+          <li class="h-item branch-down">
+            <button class="tree-node" type="button" aria-expanded="true" aria-controls="h-detail-2" aria-label="Collapse PID Lab research details"><span class="node-icon" aria-hidden="true">PI</span><span class="tree-index">02</span></button>
+            <div class="tree-info"><h3>PID Lab research</h3><span class="tree-category">RESEARCH</span><p class="tree-leaf" id="h-detail-2">Research with the People Interfaces and Data Lab. Project details coming soon.</p></div>
+          </li>
+          <li class="h-item branch-up">
+            <button class="tree-node" type="button" aria-expanded="true" aria-controls="h-detail-3" aria-label="Collapse CAD models and Drawings details"><span class="node-icon" aria-hidden="true">⌘</span><span class="tree-index">03</span></button>
+            <div class="tree-info"><h3>CAD models and Drawings</h3><span class="tree-category">CAD</span><p class="tree-leaf" id="h-detail-3">Models and technical drawings. Project details coming soon.</p></div>
+          </li>
+          <li class="h-item branch-down">
+            <button class="tree-node" type="button" aria-expanded="true" aria-controls="h-detail-4" aria-label="Collapse Prosthetics Projects details"><span class="node-icon" aria-hidden="true">+</span><span class="tree-index">04</span></button>
+            <div class="tree-info"><h3>Prosthetics Projects</h3><span class="tree-category">PROSTHETICS</span><p class="tree-leaf" id="h-detail-4">Plaster Casting Workshop · Below-Knee Prosthetic · Helping Hands Initiative Assistive Toys Project · E-nable</p></div>
+          </li>
+          <li class="h-item branch-up">
+            <button class="tree-node" type="button" aria-expanded="true" aria-controls="h-detail-5" aria-label="Collapse Python Projects details"><span class="node-icon" aria-hidden="true">&gt;_</span><span class="tree-index">05</span></button>
+            <div class="tree-info"><h3>Python Projects</h3><span class="tree-category">PYTHON</span><p class="tree-leaf" id="h-detail-5">Calculator · Tic tac toe game · Weather forecast · Grocery list</p></div>
+          </li>
+          <li class="h-item branch-down">
+            <button class="tree-node" type="button" aria-expanded="true" aria-controls="h-detail-6" aria-label="Collapse pods.BMD details"><span class="node-icon" aria-hidden="true">◉</span><span class="tree-index">06</span></button>
+            <div class="tree-info"><h3>pods.BMD</h3><span class="tree-category">BIOMED</span><p class="tree-leaf" id="h-detail-6">Biomedical design project. Project details coming soon.</p></div>
+          </li>
+          <li class="h-item branch-up">
+            <button class="tree-node" type="button" aria-expanded="true" aria-controls="h-detail-7" aria-label="Collapse Machining Projects details"><span class="node-icon" aria-hidden="true">⚒</span><span class="tree-index">07</span></button>
+            <div class="tree-info"><h3>Machining Projects</h3><span class="tree-category">MACHINING</span><p class="tree-leaf" id="h-detail-7">Hammer · Plumb Bob</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="tree-option" id="vertical" aria-labelledby="vertical-title">
+      <p class="section-label">VERSION 02 · FOLLOW THE SCROLL</p>
+      <h2 id="vertical-title">Vertical scroll tree</h2>
+      <p class="option-intro">The trunk fills as you move down the page. Projects alternate from side to side, while detail leaves sit at deliberately uneven offsets.</p>
+      <ol class="v-tree" aria-label="Vertical project timeline tree">
+        <li class="v-item side-left">
+          <button class="tree-node v-node" type="button" aria-expanded="true" aria-controls="v-detail-1" aria-label="Collapse Bloomino details"><span class="node-icon" aria-hidden="true">✿</span><span class="tree-index">01</span></button>
+          <article class="v-project"><h3>Bloomino</h3><span class="tree-category">DESIGN</span><p class="v-leaf" id="v-detail-1">A people-centered design project. Project details coming soon.</p></article>
+        </li>
+        <li class="v-item side-right">
+          <button class="tree-node v-node" type="button" aria-expanded="true" aria-controls="v-detail-2" aria-label="Collapse PID Lab research details"><span class="node-icon" aria-hidden="true">PI</span><span class="tree-index">02</span></button>
+          <article class="v-project"><h3>PID Lab research</h3><span class="tree-category">RESEARCH</span><p class="v-leaf" id="v-detail-2">Research with the People Interfaces and Data Lab. Project details coming soon.</p></article>
+        </li>
+        <li class="v-item side-left">
+          <button class="tree-node v-node" type="button" aria-expanded="true" aria-controls="v-detail-3" aria-label="Collapse CAD models and Drawings details"><span class="node-icon" aria-hidden="true">⌘</span><span class="tree-index">03</span></button>
+          <article class="v-project"><h3>CAD models and Drawings</h3><span class="tree-category">CAD</span><p class="v-leaf" id="v-detail-3">Models and technical drawings. Project details coming soon.</p></article>
+        </li>
+        <li class="v-item side-right">
+          <button class="tree-node v-node" type="button" aria-expanded="true" aria-controls="v-detail-4" aria-label="Collapse Prosthetics Projects details"><span class="node-icon" aria-hidden="true">+</span><span class="tree-index">04</span></button>
+          <article class="v-project"><h3>Prosthetics Projects</h3><span class="tree-category">PROSTHETICS</span><p class="v-leaf" id="v-detail-4">Plaster Casting Workshop · Below-Knee Prosthetic · Helping Hands Initiative Assistive Toys Project · E-nable</p></article>
+        </li>
+        <li class="v-item side-left">
+          <button class="tree-node v-node" type="button" aria-expanded="true" aria-controls="v-detail-5" aria-label="Collapse Python Projects details"><span class="node-icon" aria-hidden="true">&gt;_</span><span class="tree-index">05</span></button>
+          <article class="v-project"><h3>Python Projects</h3><span class="tree-category">PYTHON</span><p class="v-leaf" id="v-detail-5">Calculator · Tic tac toe game · Weather forecast · Grocery list</p></article>
+        </li>
+        <li class="v-item side-right">
+          <button class="tree-node v-node" type="button" aria-expanded="true" aria-controls="v-detail-6" aria-label="Collapse pods.BMD details"><span class="node-icon" aria-hidden="true">◉</span><span class="tree-index">06</span></button>
+          <article class="v-project"><h3>pods.BMD</h3><span class="tree-category">BIOMED</span><p class="v-leaf" id="v-detail-6">Biomedical design project. Project details coming soon.</p></article>
+        </li>
+        <li class="v-item side-left">
+          <button class="tree-node v-node" type="button" aria-expanded="true" aria-controls="v-detail-7" aria-label="Collapse Machining Projects details"><span class="node-icon" aria-hidden="true">⚒</span><span class="tree-index">07</span></button>
+          <article class="v-project"><h3>Machining Projects</h3><span class="tree-category">MACHINING</span><p class="v-leaf" id="v-detail-7">Hammer · Plumb Bob</p></article>
+        </li>
+      </ol>
+      <p class="scroll-note">FOLLOW THE TRUNK AS IT GROWS WITH YOUR SCROLL ↓</p>
+    </section>
+  </main>
+  <footer class="page-footer">PROJECT TREE CONCEPTS · EXISTING PORTFOLIO TIMELINE UNCHANGED</footer>
+  <script>
+    document.querySelectorAll(".tree-node").forEach(button => {
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        const leaf = document.getElementById(button.getAttribute("aria-controls"));
+        button.setAttribute("aria-expanded", String(!expanded));
+        button.setAttribute("aria-label", `${expanded ? "Expand" : "Collapse"} ${leaf.closest(".h-item, .v-item").querySelector("h3").textContent} details`);
+        leaf.hidden = expanded;
+      });
+    });
+
+    const verticalTree = document.querySelector(".v-tree");
+    const verticalItems = [...verticalTree.querySelectorAll(".v-item")];
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateTreeProgress() {
+      const bounds = verticalTree.getBoundingClientRect();
+      const progress = reducedMotion.matches
+        ? 1
+        : Math.max(0, Math.min(1, (innerHeight - bounds.top) / (bounds.height + innerHeight)));
+      verticalTree.style.setProperty("--tree-progress", `${progress * 100}%`);
+      verticalTree.style.setProperty("--tree-marker", `${9 + progress * Math.max(0, verticalTree.offsetHeight - 18)}px`);
+    }
+
+    if (reducedMotion.matches || !("IntersectionObserver" in window)) {
+      verticalItems.forEach(item => item.classList.add("is-visible"));
+    } else {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      verticalItems.forEach(item => observer.observe(item));
+    }
+
+    addEventListener("scroll", updateTreeProgress, { passive: true });
+    addEventListener("resize", updateTreeProgress);
+    reducedMotion.addEventListener("change", updateTreeProgress);
+    updateTreeProgress();
+  </script>
+</body>
+</html>

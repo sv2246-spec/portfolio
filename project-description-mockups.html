@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2e9">
+  <title>Project Description Mockups — Solomiia Valihunda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --olive: #636b2f;
+      --lime: #d4de95;
+      --ink: #3d4127;
+      --paper: #f4f2e9;
+      --white: #fbfaf5;
+      --muted: #777762;
+      --mono: "Space Mono", monospace;
+      --sans: "Plus Jakarta Sans", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 14px/1.6 var(--sans);
+    }
+
+    .page-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      width: min(100% - 64px, 1600px);
+      margin: 0 auto;
+      padding: 38px 0 25px;
+    }
+
+    .page-kicker,
+    .mockup-kicker,
+    .label,
+    .tag,
+    .meta-label,
+    .footnote {
+      font: 9px/1.5 var(--mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .page-kicker { margin: 0 0 8px; color: var(--olive); }
+    h1 { margin: 0; font-size: clamp(30px, 4vw, 48px); font-weight: 500; letter-spacing: -.07em; line-height: 1.05; }
+    .page-hint { max-width: 260px; margin: 0 0 3px; color: var(--muted); font-size: 12px; }
+
+    .mockups {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+      width: min(100% - 64px, 1600px);
+      margin: 0 auto 36px;
+    }
+
+    .option {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid #3d41271a;
+      background: var(--white);
+      box-shadow: 0 12px 30px #3d41270d;
+    }
+
+    .option-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-bottom: 1px solid #3d41271a;
+      background: #eeede3;
+    }
+
+    .option-head strong { font-size: 12px; font-weight: 700; }
+    .option-head span { color: var(--olive); font: 8px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .mini-page { min-height: 690px; }
+    .mini-nav { display: flex; justify-content: space-between; padding: 14px 15px; font-size: 9px; font-weight: 700; }
+    .mini-nav span:last-child { color: var(--muted); font-weight: 500; }
+    .label { color: var(--olive); }
+    .summary { color: var(--muted); font-size: 10px; line-height: 1.7; }
+    .meta-label { color: var(--muted); font-size: 7px; }
+
+    /* 01: Editorial */
+    .editorial .ed-hero { padding: 22px 18px 24px; color: var(--paper); background: var(--ink); }
+    .editorial .label { color: var(--lime); }
+    .editorial h2 { margin: 17px 0 10px; font-size: 37px; font-weight: 500; letter-spacing: -.08em; line-height: .98; }
+    .editorial .ed-hero .summary { max-width: 215px; margin: 0; color: #d1d1bc; }
+    .editorial .ed-visual {
+      position: relative;
+      height: 164px;
+      margin-top: 21px;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 68% 32%, #d4de95 0 4%, transparent 5%), radial-gradient(ellipse at 68% 32%, #d4de9545 0 14%, transparent 15%), linear-gradient(140deg, #737958, #25291f 70%);
+    }
+    .editorial .ed-visual::before,
+    .editorial .ed-visual::after { position: absolute; content: ""; border: 1px solid #f4f2e982; transform: rotate(-24deg); }
+    .editorial .ed-visual::before { right: 12px; bottom: -50px; width: 145px; height: 195px; border-radius: 50%; }
+    .editorial .ed-visual::after { right: 37px; bottom: -43px; width: 110px; height: 145px; border-radius: 50%; }
+    .editorial .ed-body { padding: 19px 18px; }
+    .editorial h3,.image-first h3,.case-study h3,.process h3,.type-led h3 { margin: 0; font-size: 14px; letter-spacing: -.04em; }
+    .editorial .ed-body .summary { margin: 8px 0 17px; }
+    .editorial .pullquote { padding: 12px; border-left: 2px solid var(--olive); background: #eeede3; font-size: 10px; font-weight: 600; line-height: 1.55; }
+    .editorial .ed-meta { display: flex; gap: 16px; margin-top: 17px; }
+
+    /* 02: Image first */
+    .image-first .if-image {
+      position: relative;
+      height: 260px;
+      padding: 18px;
+      color: var(--paper);
+      background: radial-gradient(ellipse at 64% 38%, #d4de9577, transparent 22%), radial-gradient(ellipse at 30% 78%, #111710b8, transparent 35%), linear-gradient(145deg, #939675, #343a2e 68%, #b8b395);
+    }
+    .image-first .if-image::before { position: absolute; inset: 20px 30px; border: 1px solid #f4f2e95c; border-radius: 46% 54% 37% 63%; transform: rotate(25deg); content: ""; }
+    .image-first .if-image .label { position: relative; z-index: 1; color: var(--paper); }
+    .image-first .if-stamp { position: absolute; right: 17px; bottom: 17px; width: 54px; height: 54px; display: grid; place-items: center; border: 1px solid #f4f2e988; border-radius: 50%; font: 8px var(--mono); }
+    .image-first .if-content { position: relative; width: calc(100% - 24px); margin: -38px auto 0; padding: 18px 15px; background: var(--white); box-shadow: 0 10px 24px #24281e2b; }
+    .image-first h2 { margin: 9px 0 8px; font-size: 28px; font-weight: 500; letter-spacing: -.075em; line-height: 1; }
+    .image-first .summary { margin: 0; }
+    .image-first .if-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; padding-top: 12px; border-top: 1px solid #3d412722; }
+    .image-first .if-row b { display: block; margin-top: 3px; font-size: 9px; font-weight: 600; }
+    .image-first .if-detail { padding: 17px 15px; }
+    .image-first .if-detail .summary { margin: 7px 0 15px; }
+    .image-first .if-link { display: inline-flex; gap: 8px; color: var(--olive); font-size: 9px; font-weight: 700; }
+
+    /* 03: Case-study dashboard */
+    .case-study { padding: 0 15px 18px; }
+    .case-study .cs-top { padding: 22px 0 16px; border-bottom: 1px solid #3d412722; }
+    .case-study h2 { margin: 11px 0 8px; font-size: 31px; font-weight: 500; letter-spacing: -.08em; line-height: 1; }
+    .case-study .summary { margin: 0; }
+    .case-study .cs-facts { display: grid; grid-template-columns: repeat(2, 1fr); margin: 15px 0; border-top: 1px solid #3d412722; border-left: 1px solid #3d412722; }
+    .case-study .cs-fact { min-height: 58px; padding: 9px; border-right: 1px solid #3d412722; border-bottom: 1px solid #3d412722; }
+    .case-study .cs-fact strong { display: block; margin-top: 4px; font-size: 9px; font-weight: 600; }
+    .case-study .cs-image { position: relative; height: 145px; overflow: hidden; background: linear-gradient(155deg, transparent 40%, #24281e9c), radial-gradient(circle at 30% 35%, #d4de95 0 8%, transparent 8.5%), linear-gradient(130deg, #b9bd9e, #60684c 56%, #343a2c); }
+    .case-study .cs-image::after { position: absolute; top: 36px; left: 52px; width: 90px; height: 70px; border: 1px solid #f4f2e9a1; border-radius: 50% 50% 15% 15%; transform: rotate(-18deg); content: ""; }
+    .case-study .cs-block { padding: 17px 0 13px; border-bottom: 1px solid #3d412722; }
+    .case-study .cs-block .summary { margin: 7px 0 0; }
+    .case-study .cs-outcome { display: flex; justify-content: space-between; gap: 10px; padding: 13px 10px; margin-top: 14px; color: var(--paper); background: var(--olive); font-size: 8px; }
+
+    /* 04: Process narrative */
+    .process { padding: 0 16px 18px; background: #eeede3; }
+    .process .pr-top { padding: 20px 0 18px; }
+    .process h2 { max-width: 220px; margin: 12px 0 9px; font-size: 32px; font-weight: 500; letter-spacing: -.08em; line-height: 1; }
+    .process .summary { margin: 0; }
+    .process .pr-visual { position: relative; height: 115px; margin: 2px 0 18px; overflow: hidden; background: linear-gradient(125deg, #a9ad8b, #5b6146 58%, #353a2d); }
+    .process .pr-visual::before { position: absolute; top: 22px; left: 27px; width: 76px; height: 76px; border: 1px solid #f4f2e988; border-radius: 50%; box-shadow: 30px 0 0 -1px #5b6146, 30px 0 0 0 #f4f2e988, 60px 0 0 -1px #5b6146, 60px 0 0 0 #f4f2e988; content: ""; }
+    .process .pr-steps { position: relative; margin-left: 6px; padding-left: 21px; border-left: 1px solid #636b2f73; }
+    .process .pr-step { position: relative; padding: 0 0 15px 10px; }
+    .process .pr-step::before { position: absolute; top: 4px; left: -26px; width: 9px; height: 9px; border: 2px solid #eeede3; border-radius: 50%; background: var(--olive); content: ""; }
+    .process .pr-step .label { display: block; margin-bottom: 3px; font-size: 7px; }
+    .process .pr-step p { margin: 5px 0 0; color: var(--muted); font-size: 9px; line-height: 1.6; }
+    .process .pr-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+    .process .pr-tags span { padding: 4px 7px; border: 1px solid #636b2f55; border-radius: 20px; color: var(--olive); font: 7px var(--mono); }
+
+    /* 05: Type-led */
+    .type-led { padding: 0 16px 18px; }
+    .type-led .tl-top { padding: 22px 0 17px; }
+    .type-led .tl-index { display: flex; align-items: center; justify-content: space-between; color: var(--olive); font: 9px var(--mono); }
+    .type-led h2 { margin: 20px 0 11px; font-size: 39px; font-weight: 500; letter-spacing: -.09em; line-height: .9; }
+    .type-led .summary { max-width: 215px; margin: 0; }
+    .type-led .tl-rule { display: flex; align-items: center; gap: 8px; margin: 17px 0; color: var(--olive); font: 8px var(--mono); }
+    .type-led .tl-rule::after { height: 1px; flex: 1; background: #636b2f55; content: ""; }
+    .type-led .tl-quote { padding: 14px 13px; margin: 0; color: var(--paper); background: var(--ink); font-size: 12px; font-weight: 500; line-height: 1.55; }
+    .type-led .tl-quote span { display: block; margin-top: 9px; color: var(--lime); font: 7px var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .type-led .tl-section { padding: 17px 0; border-bottom: 1px solid #3d412722; }
+    .type-led .tl-section .summary { margin: 7px 0 0; }
+    .type-led .tl-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .type-led .tl-meta span { padding: 5px 8px; background: #eeede3; color: var(--olive); font: 7px var(--mono); }
+
+    .page-foot { width: min(100% - 64px, 1600px); margin: 0 auto; padding: 0 0 24px; color: var(--muted); font-size: 10px; }
+
+    @media (max-width: 1150px) {
+      .mockups { grid-template-columns: repeat(5, 270px); width: calc(100% - 32px); overflow-x: auto; padding: 0 0 16px; scroll-snap-type: x mandatory; }
+      .option { scroll-snap-align: start; }
+      .page-head,.page-foot { width: calc(100% - 32px); }
+    }
+
+    @media (max-width: 520px) {
+      .page-head { align-items: start; flex-direction: column; gap: 10px; padding-top: 25px; }
+      .page-hint { max-width: 320px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-head">
+    <div>
+      <p class="page-kicker">PORTFOLIO · PROJECT PAGE EXPLORATIONS</p>
+      <h1>Five ways to tell the project story.</h1>
+    </div>
+    <p class="page-hint">Side-by-side concepts for a modern project description. Scroll horizontally on smaller screens.</p>
+  </header>
+
+  <main class="mockups" aria-label="Five project description design mockups">
+    <article class="option editorial">
+      <header class="option-head"><strong>01 · Editorial</strong><span>Story-led</span></header>
+      <div class="mini-page">
+        <div class="mini-nav"><span>SV.</span><span>PROJECT 01　↗</span></div>
+        <section class="ed-hero">
+          <span class="label">DESIGN · PROJECT OVERVIEW</span>
+          <h2>Bloomino</h2>
+          <p class="summary">A concise project introduction goes here: the need, the audience, and what you made.</p>
+          <div class="ed-visual" aria-hidden="true"></div>
+        </section>
+        <section class="ed-body">
+          <span class="label">THE CHALLENGE</span>
+          <h3>Start with the why.</h3>
+          <p class="summary">Set the context in a few clear sentences. Keep the focus on the design question and the people it affects.</p>
+          <div class="pullquote">“A short insight or defining idea that makes this project memorable.”</div>
+          <div class="ed-meta"><span><span class="meta-label">ROLE</span><br><b>[Your role]</b></span><span><span class="meta-label">TOOLS</span><br><b>[Tools used]</b></span></div>
+        </section>
+      </div>
+    </article>
+
+    <article class="option image-first">
+      <header class="option-head"><strong>02 · Immersive</strong><span>Image-first</span></header>
+      <div class="mini-page">
+        <div class="mini-nav"><span>SV.</span><span>← ALL PROJECTS</span></div>
+        <div class="if-image" aria-label="Abstract image placeholder">
+          <span class="label">SELECTED PROJECT · DESIGN</span><span class="if-stamp">IMAGE<br>01</span>
+        </div>
+        <section class="if-content">
+          <span class="label">PROJECT OVERVIEW</span>
+          <h2>Bloomino</h2>
+          <p class="summary">Lead with one strong visual, then let a floating intro card frame the story.</p>
+          <div class="if-row"><span><span class="meta-label">ROLE</span><b>[Your role]</b></span><span><span class="meta-label">DURATION</span><b>[Timeframe]</b></span></div>
+        </section>
+        <section class="if-detail">
+          <h3>From idea to impact.</h3>
+          <p class="summary">Introduce the challenge, then guide visitors into the project details below.</p>
+          <span class="if-link">EXPLORE THE STORY <span aria-hidden="true">↓</span></span>
+        </section>
+      </div>
+    </article>
+
+    <article class="option case-study">
+      <header class="option-head"><strong>03 · Case study</strong><span>At-a-glance</span></header>
+      <div class="mini-page">
+        <div class="mini-nav"><span>SV.</span><span>WORK / 01</span></div>
+        <section class="cs-top">
+          <span class="label">DESIGN CASE STUDY</span>
+          <h2>Bloomino</h2>
+          <p class="summary">A clear summary that explains the project and its value in just a few lines.</p>
+        </section>
+        <div class="cs-facts">
+          <div class="cs-fact"><span class="meta-label">ROLE</span><strong>[Your role]</strong></div>
+          <div class="cs-fact"><span class="meta-label">YEAR</span><strong>[Year]</strong></div>
+          <div class="cs-fact"><span class="meta-label">TOOLS</span><strong>[Tools]</strong></div>
+          <div class="cs-fact"><span class="meta-label">FOCUS</span><strong>[Focus area]</strong></div>
+        </div>
+        <div class="cs-image" aria-label="Abstract project image placeholder"></div>
+        <section class="cs-block"><span class="label">01 / THE OPPORTUNITY</span><p class="summary">A short statement of the problem and who the work is for.</p></section>
+        <section class="cs-block"><span class="label">02 / THE APPROACH</span><p class="summary">Summarize your process, key decisions, and what you learned.</p></section>
+        <div class="cs-outcome"><span>OUTCOME</span><strong>[Key result or learning] ↗</strong></div>
+      </div>
+    </article>
+
+    <article class="option process">
+      <header class="option-head"><strong>04 · Process</strong><span>Milestones</span></header>
+      <div class="mini-page">
+        <div class="mini-nav"><span>SV.</span><span>PROJECT 01</span></div>
+        <section class="pr-top">
+          <span class="label">A PROJECT IN PROGRESS</span>
+          <h2>Bloomino, from brief to build.</h2>
+          <p class="summary">A compact overview leads directly into the decisions that shaped the final work.</p>
+        </section>
+        <div class="pr-visual" aria-label="Abstract process image placeholder"></div>
+        <div class="pr-steps">
+          <section class="pr-step"><span class="label">01 · DISCOVER</span><h3>Understand the need.</h3><p>Who is this for? What should the experience make easier?</p></section>
+          <section class="pr-step"><span class="label">02 · EXPLORE</span><h3>Test directions.</h3><p>Show a few iterations and explain how feedback changed them.</p></section>
+          <section class="pr-step"><span class="label">03 · DELIVER</span><h3>Share the outcome.</h3><p>Close with what you built and what you would improve next.</p></section>
+        </div>
+        <div class="pr-tags"><span>[ROLE]</span><span>[TOOLS]</span><span>[TEAM]</span></div>
+      </div>
+    </article>
+
+    <article class="option type-led">
+      <header class="option-head"><strong>05 · Type-led</strong><span>Minimal</span></header>
+      <div class="mini-page">
+        <div class="mini-nav"><span>SV.</span><span>SELECTED WORK ↗</span></div>
+        <section class="tl-top">
+          <div class="tl-index"><span>DESIGN / 01</span><span>01—05</span></div>
+          <h2>Bloomino<span style="color:var(--olive)">.</span></h2>
+          <p class="summary">An airy, typography-first introduction with room for a memorable point of view.</p>
+          <div class="tl-rule">THE PROJECT</div>
+          <blockquote class="tl-quote">“Open with the most human, surprising, or useful idea behind your work.”<span>PROJECT THESIS · REPLACE WITH YOUR OWN</span></blockquote>
+        </section>
+        <section class="tl-section"><span class="label">THE QUESTION</span><h3>What needed to change?</h3><p class="summary">Frame the challenge in one focused paragraph and explain why it mattered.</p></section>
+        <section class="tl-section"><span class="label">THE RESPONSE</span><h3>What did you make?</h3><p class="summary">Describe the concept, your contribution, and one important decision.</p></section>
+        <div class="tl-meta"><span>[YOUR ROLE]</span><span>[TOOLS]</span><span>[YEAR]</span></div>
+      </div>
+    </article>
+  </main>
+  <footer class="page-foot">Concept copy is placeholder text. These mockups are visual directions, not edits to the live project pages.</footer>
+</body>
+</html>
