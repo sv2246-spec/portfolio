@@ -2,7 +2,7 @@ const projects = {
   bloomino: {
     title: "Bloomino",
     category: "DESIGN",
-    summary: "A people-centered design project. Project details coming soon.",
+    summary: "An engineered art concept inspired by nature, fashion, and human-tech interaction.",
     subsections: [
       { title: "Project overview", description: "A people-centered design project. Project details coming soon." }
     ]
@@ -64,7 +64,11 @@ const projects = {
   }
 };
 
-const project = projects[new URLSearchParams(location.search).get("project")];
+const projectId = new URLSearchParams(location.search).get("project");
+if (projectId === "bloomino") {
+  location.replace("bloomino-option-3-desktop.html");
+}
+const project = projects[projectId];
 const title = document.querySelector("#project-title");
 const category = document.querySelector("#project-category");
 const summary = document.querySelector("#project-summary");
@@ -82,7 +86,6 @@ if (!project) {
   title.textContent = project.title;
   category.textContent = project.category;
   summary.textContent = project.summary;
-
   project.subsections.forEach((subsection, index) => {
     const section = document.createElement("section");
     section.className = "project-section";
