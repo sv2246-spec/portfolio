@@ -53,3 +53,4 @@
 .project-page[data-style="spotlight"] .page-intro h1 {
   word-spacing: .12em;
 }
+.project-page[data-style="spotlight"] .pidlab-website-link{display:inline-block;margin-top:14px;color:var(--lime);font:10px var(--mono);text-decoration:underline;text-underline-offset:4px}

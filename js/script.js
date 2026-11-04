@@ -81,15 +81,61 @@ scrollScenes();
 const form = document.querySelector(".contact-form");
 const contact = document.querySelector(".contact");
 const thanks = document.querySelector(".thank-you");
+function flyPaperPlane() {
+  const sendButton = form.querySelector(".send-button");
+  const talkButton = document.querySelector(".nav-contact");
+  const menuButton = document.querySelector(".menu-toggle");
+  const start = sendButton.getBoundingClientRect();
+  const talkRect = talkButton.getBoundingClientRect();
+  const target = talkRect.width && talkRect.height ? talkRect : menuButton.getBoundingClientRect();
+  const startX = start.left + start.width / 2;
+  const startY = start.top + start.height / 2;
+  const endX = target.left + target.width / 2;
+  const endY = target.top + target.height / 2;
+  const plane = document.createElement("span");
+  plane.className = "paper-plane-flight";
+  plane.setAttribute("aria-hidden", "true");
+  plane.innerHTML = '<svg viewBox="0 0 24 24" focusable="false"><path d="M2 21 23 2 16 23l-5-8-9 6Z"/><path d="m11 15 12-13"/></svg>';
+  document.body.append(plane);
+  const prefersLessMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const loopCenterX = startX + (endX - startX) * .55;
+  const loopCenterY = startY + (endY - startY) * .55 - Math.min(90, Math.abs(endY - startY) * .14);
+  const loopRadius = 48;
+  const keyframes = [
+    { left: `${startX}px`, top: `${startY}px`, opacity: 1, transform: "translate(-50%, -50%) rotate(-12deg) scale(.75)", offset: 0 },
+    { left: `${loopCenterX + loopRadius}px`, top: `${loopCenterY}px`, opacity: 1, transform: "translate(-50%, -50%) rotate(-12deg) scale(1)", offset: .28 }
+  ];
+  for (let step = 1; step <= 8; step++) {
+    const angle = step * Math.PI / 4;
+    const progress = .28 + step * .055;
+    keyframes.push({
+      left: `${loopCenterX + Math.cos(angle) * loopRadius}px`,
+      top: `${loopCenterY + Math.sin(angle) * loopRadius}px`,
+      opacity: 1,
+      transform: `translate(-50%, -50%) rotate(${-12 + step * 45}deg) scale(1)`,
+      offset: progress
+    });
+  }
+  keyframes.push({
+    left: `${endX}px`, top: `${endY}px`, opacity: 0,
+    transform: "translate(-50%, -50%) rotate(336deg) scale(.55)", offset: 1
+  });
+  const flight = plane.animate(keyframes, {
+    duration: prefersLessMotion ? 120 : 4500,
+    easing: "cubic-bezier(.2,.75,.25,1)"
+  });
+  flight.onfinish = () => plane.remove();
+}
 form.addEventListener("submit", event => {
   event.preventDefault();
   if (!form.reportValidity()) return;
   form.classList.add("sent");
+  flyPaperPlane();
   setTimeout(() => {
     contact.classList.add("is-sent");
     thanks.classList.add("is-visible");
     thanks.focus();
-  }, 950);
+  }, 4500);
 });
 document.querySelector(".thank-back").addEventListener("click", () => {
   contact.classList.remove("is-sent");

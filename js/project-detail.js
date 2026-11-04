@@ -28,7 +28,16 @@ const projects = {
     category: "PROSTHETICS",
     summary: "A collection of prosthetics and assistive-device projects.",
     subsections: [
-      { title: "Plaster Casting Workshop", description: "Details for this project are coming soon." },
+      {
+        title: "Plaster Casting Workshop",
+        description: "Photos from the plaster casting workshop.",
+        galleryLayout: "plaster-casting",
+        images: [
+          { src: "assets/Plaster%20casting%20workshop/WhatsApp%20Image%202026-11-02%20at%209.59.31%20PM.jpeg", alt: "Workshop participants wrap a forearm in plaster casting material to form a prosthetic socket mold." },
+          { src: "assets/Plaster%20casting%20workshop/WhatsApp%20Image%202026-11-02%20at%2010.00.53%20PM.jpeg", alt: "Plaster forms set in a casting tray after the workshop." },
+          { src: "assets/Plaster%20casting%20workshop/WhatsApp%20Image%202026-11-02%20at%2010.01.08%20PM.jpeg", alt: "A participant pours plaster from a mixing cup into a socket mold." }
+        ]
+      },
       { title: "Below-Knee Prosthetic", description: "Details for this project are coming soon." },
       { title: "Helping Hands Initiative Assistive Toys Project", description: "Details for this project are coming soon." },
       { title: "E-nable", description: "Details for this project are coming soon." }
@@ -149,7 +158,7 @@ if (!project) {
     if (subsection.images) {
       story.classList.add("project-story-over-gallery");
       const gallery = makeElement("div", "project-image-gallery");
-      gallery.setAttribute("aria-label", "Machinist hammer and acrylic base photos");
+      gallery.setAttribute("aria-label", `${subsection.title} photo gallery`);
       subsection.images.forEach(image => {
         const figure = makeElement("figure", "project-gallery-image");
         const photo = makeElement("img");
