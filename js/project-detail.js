@@ -30,7 +30,7 @@ const projects = {
     subsections: [
       {
         title: "Plaster Casting Workshop",
-        description: "Photos from the plaster casting workshop.",
+        description: "Hands-on workshop held for Prosthetics Club members on plaster casting and mold making for socket design.",
         galleryLayout: "plaster-casting",
         images: [
           { src: "assets/Plaster%20casting%20workshop/WhatsApp%20Image%202026-11-02%20at%209.59.31%20PM.jpeg", alt: "Workshop participants wrap a forearm in plaster casting material to form a prosthetic socket mold." },
@@ -38,9 +38,15 @@ const projects = {
           { src: "assets/Plaster%20casting%20workshop/WhatsApp%20Image%202026-11-02%20at%2010.01.08%20PM.jpeg", alt: "A participant pours plaster from a mixing cup into a socket mold." }
         ]
       },
-      { title: "Below-Knee Prosthetic", description: "Details for this project are coming soon." },
-      { title: "Helping Hands Initiative Assistive Toys Project", description: "Details for this project are coming soon." },
-      { title: "E-nable", description: "Details for this project are coming soon." }
+      {
+        title: "Below-Knee Prosthetic",
+        description: "BKP design created and assembled by the Prosthetics Club team in 2025.",
+        galleryLayout: "bkp-gallery",
+        images: [
+          { src: "assets/BKP%20project/assem1.png", alt: "CAD rendering of the assembled below-knee prosthetic design, showing its outer shell and foot assembly." },
+          { src: "assets/BKP%20project/assem_section.png", alt: "Section view of the below-knee prosthetic assembly showing its internal components and foot structure." }
+        ]
+      },
     ]
   },
   python: {

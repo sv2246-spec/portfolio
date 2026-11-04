@@ -376,3 +376,5 @@
   }
 
 }
+.project-ribbon .bkp-card-image{background-image:url("../assets/BKP%20project/assem1.png");background-position:center 95%;background-size:cover;filter:none}.project-ribbon .ribbon-project:nth-child(3) .bkp-card-image{filter:none}
+.project-ribbon .node-icon svg{display:block;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
