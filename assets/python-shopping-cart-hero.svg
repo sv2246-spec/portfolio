@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1648 700" role="img" aria-labelledby="title desc">
+  <title id="title">Shopping cart Python code</title>
+  <desc id="desc">A dark code editor showing Python code for removing cart items and calculating the total.</desc>
+  <rect width="1648" height="700" fill="#282a2d"/>
+  <rect width="620" height="700" fill="#26282b"/>
+  <path d="M620 0v700" stroke="#55585b" stroke-width="1"/>
+  <g stroke="#45484b" stroke-width="1" opacity=".7">
+    <path d="M18 0v700M34 0v700M49 0v700M64 0v700"/>
+  </g>
+  <g font-family="Consolas, 'Courier New', monospace" font-size="14" xml:space="preserve">
+    <g fill="#80b874">
+      <text x="33" y="12"># Check if the item exists in the cart</text>
+      <text x="64" y="49"># if there is more than one item, take the quant down by 1</text>
+      <text x="64" y="122"># if exactly 1, delete it</text>
+      <text x="64" y="343"># Iterate through the item names in the cart</text>
+      <text x="80" y="379"># Find the corresponding item dictionary in the 'shelf' list</text>
+      <text x="111" y="471"># Found the item, exit inner loop</text>
+      <text x="96" y="508"># Ensure item details were found</text>
+      <text x="127" y="545"># Print the item name, quantity from cart, and calculated price</text>
+      <text x="127" y="581"># Add to total, multiplying item price by the quantity in cart</text>
+    </g>
+    <g fill="#d8a7cc">
+      <text x="33" y="30">if</text><text x="54" y="30" fill="#dedede">user_choice_delete</text><text x="194" y="30" fill="#d8a7cc">in</text><text x="211" y="30" fill="#dedede">cart:</text>
+      <text x="64" y="67">if</text><text x="82" y="67" fill="#dedede">cart[user_choice_delete] &gt; 1:</text>
+      <text x="64" y="140">else:</text>
+      <text x="33" y="231">else:</text>
+      <text x="33" y="287">elif</text><text x="67" y="287" fill="#dedede">choice</text><text x="111" y="287" fill="#d8a7cc">==</text>
+      <text x="64" y="324">total = 0</text>
+      <text x="64" y="361">for</text><text x="91" y="361" fill="#dedede">item_name_in_cart</text><text x="221" y="361" fill="#d8a7cc">in</text><text x="238" y="361" fill="#dedede">cart:</text>
+      <text x="80" y="416">for</text><text x="107" y="416" fill="#dedede">shelf_item</text><text x="183" y="416" fill="#d8a7cc">in</text><text x="200" y="416" fill="#dedede">shelf:</text>
+      <text x="96" y="434">if</text><text x="113" y="434" fill="#dedede">shelf_item["name"] == item_name_in_cart:</text>
+      <text x="96" y="489">if</text><text x="113" y="489" fill="#dedede">current_item_details:</text>
+      <text x="33" y="655">elif</text><text x="67" y="655" fill="#dedede">choice</text><text x="111" y="655" fill="#d8a7cc">==</text>
+      <text x="64" y="674">print</text><text x="100" y="674" fill="#dedede">(</text>
+      <text x="33" y="692">break</text>
+    </g>
+    <g fill="#dedede">
+      <text x="80" y="85">cart[user_choice_delete] -= 1</text>
+      <text x="80" y="104">print(<tspan fill="#ce9178">"One item removed from cart."</tspan>)</text>
+      <text x="80" y="158">del cart[user_choice_delete]</text>
+      <text x="80" y="177">print(<tspan fill="#ce9178">"Item fully removed from cart."</tspan>)</text>
+      <text x="64" y="250">print(f<tspan fill="#ce9178">"{user_choice_delete} is not in your cart."</tspan>)</text>
+      <text x="145" y="287" fill="#ce9178">"3"</text><text x="171" y="287">:</text>
+      <text x="64" y="324"><tspan fill="#80b874"># Corrected typo: t3otal to total</tspan></text>
+      <text x="127" y="452">current_item_details = shelf_item</text>
+      <text x="127" y="471">break</text>
+      <text x="127" y="526">print(f<tspan fill="#ce9178">"{item_name_in_cart}: {cart[item_name_in_cart]} x ${current_item_details['price']:.2f}"</tspan>)</text>
+      <text x="127" y="600">total += current_item_details[<tspan fill="#ce9178">"price"</tspan>] * cart[item_name_in_cart]</text>
+      <text x="64" y="619">print(f<tspan fill="#ce9178">"The total cost of your cart is ${total:.2f}"</tspan>)</text>
+      <text x="145" y="655" fill="#ce9178">"4"</text><text x="171" y="655">:</text>
+      <text x="100" y="674" fill="#dedede">(</text><text x="108" y="674" fill="#ce9178">"Thank you for shopping with us ! "</text><text x="351" y="674">)</text>
+    </g>
+  </g>
+</svg>

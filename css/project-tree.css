@@ -200,32 +200,58 @@
     linear-gradient(128deg, #697055, #34382c 55%, #989577);
 }
 
+.project-ribbon .pid-lab-card-image {
+  background-image:
+    linear-gradient(0deg, #171a1678, transparent 42%),
+    url("../assets/PID%20Lab%20Research/o%26pofHMDandcontrollers%20%282%29.png");
+  background-position: center, center 29%;
+  background-size: cover, 160% auto;
+}
+
+.project-ribbon .pid-lab-card-image::before,
+.project-ribbon .pid-lab-card-image::after {
+  display: none;
+}
+
+.project-ribbon .bloomino-card-image {
+  background-image:
+    linear-gradient(0deg, #171a16a8, transparent 45%),
+    url("../assets/Bloomino/WhatsApp%20Image%202026-11-02%20at%209.53.12%20PM.jpeg");
+  background-position: center 48%;
+  background-size: cover;
+}
+
+.project-ribbon .bloomino-card-image::before,
+.project-ribbon .bloomino-card-image::after {
+  display: none;
+}
+
+.project-ribbon .python-card-image {
+  background-image:
+    linear-gradient(0deg, #171a1640, #171a1610),
+    url("../assets/python-shopping-cart-hero.svg");
+  background-position: center, left center;
+  background-size: cover;
+  filter: none;
+}
+
+.project-ribbon .python-card-image::before,
+.project-ribbon .python-card-image::after {
+  display: none;
+}
+
+.project-ribbon .machining-card-image {
+  background-image:
+    linear-gradient(0deg, #171a1640, #171a1610),
+    url("../assets/Hammer/20251023_161708.jpg");
+  background-position: center, center 48%;
+  background-size: cover;
+  filter: none;
+}
+
 .project-ribbon .project-card-image::before,
 .project-ribbon .project-card-image::after {
-  position: absolute;
-  display: block;
-  border: 1px solid #f4f2e96b;
-  content: "";
-  pointer-events: none;
-}
-
-.project-ribbon .project-card-image::before {
-  top: -30%;
-  right: 12%;
-  width: 43%;
-  height: 125%;
-  border-radius: 48% 52% 38% 62%;
-  background: linear-gradient(145deg, #d4de9530, #f4f2e905 66%);
-  transform: rotate(-17deg);
-}
-
-.project-ribbon .project-card-image::after {
-  right: 32%;
-  bottom: -48%;
-  width: 32%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #22261c42;
+  display: none;
 }
 
 .project-ribbon .project-card-image span {
