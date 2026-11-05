@@ -203,9 +203,9 @@
 .project-ribbon .pid-lab-card-image {
   background-image:
     linear-gradient(0deg, #171a1678, transparent 42%),
-    url("../assets/PID%20Lab%20Research/o%26pofHMDandcontrollers%20%282%29.png");
-  background-position: center, center 29%;
-  background-size: cover, 160% auto;
+    url("../assets/PID%20Lab%20Research/pid-lab-card.png");
+  background-position: center, center;
+  background-size: cover, cover;
 }
 
 .project-ribbon .pid-lab-card-image::before,
@@ -216,8 +216,8 @@
 .project-ribbon .bloomino-card-image {
   background-image:
     linear-gradient(0deg, #171a16a8, transparent 45%),
-    url("../assets/Bloomino/WhatsApp%20Image%202026-11-02%20at%209.53.12%20PM.jpeg");
-  background-position: center 48%;
+    url("../assets/Bloomino/bloomino-card.jpg");
+  background-position: center;
   background-size: cover;
 }
 
@@ -376,5 +376,5 @@
   }
 
 }
-.project-ribbon .bkp-card-image{background-image:url("../assets/BKP%20project/assem1.png");background-position:center 95%;background-size:cover;filter:none}.project-ribbon .ribbon-project:nth-child(3) .bkp-card-image{filter:none}
+.project-ribbon .bkp-card-image{background-image:url("../assets/BKP%20project/assem1-card.jpg");background-position:center 95%;background-size:cover;filter:none}.project-ribbon .ribbon-project:nth-child(3) .bkp-card-image{filter:none}
 .project-ribbon .node-icon svg{display:block;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
