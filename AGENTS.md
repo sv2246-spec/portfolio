@@ -7,7 +7,8 @@ This repository contains Solomiia Valihunda's responsive biomedical engineering 
 - `index.html` is the single-page portfolio: introduction, About Me, project timeline, Skills Summary, and Contact Me.
 - `project.html` provides detail pages for the machining, Python, and prosthetics projects. The Bloomino and PID Lab links lead to dedicated project pages.
 - `bloomino-option-3-desktop.html` and `pid-lab-option-2.html` are the selected Bloomino and PID Lab project pages.
-- Other HTML files are design explorations and mockups for campus backgrounds, the project timeline, project descriptions, Bloomino, and PID Lab. The main navigation is in `index.html`.
+- `mockups/` contains design explorations and alternate mockups for campus backgrounds, the project timeline, project descriptions, Bloomino, and PID Lab. These are separate from the main site pages.
+- The main navigation is in `index.html`.
 
 ## Design
 
